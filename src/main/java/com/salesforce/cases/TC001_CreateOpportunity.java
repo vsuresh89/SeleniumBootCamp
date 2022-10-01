@@ -8,42 +8,37 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import dev.failsafe.internal.util.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TC001_CreateOpportunity {
+public class TC001_CreateOpportunity extends ProjectSpecificMethodsSelBootCamp {
 	
-	public static void main(String[] args) {
+	
+	
+	@BeforeTest
+	public void setData() {
+		excelFileName="tc001";
+	}
+	
+	
+	@Test(dataProvider="Dynamic_Data")
+	
+	public void CreateOpportunity(String name) {
 		
 		
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options=new ChromeOptions();
-		options.addArguments("--disable-notifications");
 		
-		
-		ChromeDriver driver=new ChromeDriver(options);
-		
-		driver.get("https://login.salesforce.com/");
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		WebElement elementUsername=driver.findElement(By.id("username"));
-		elementUsername.sendKeys("hari.radhakrishnan@qeagle.com");
-		WebElement elementPassword=driver.findElement(By.id("password"));
-		elementPassword.sendKeys("India$321");
-		driver.findElement(By.id("Login")).click();
-		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-		driver.findElement(By.xpath("//button[text()='View All']")).click();
-		driver.findElement(By.xpath("//input[@placeholder='Search apps or items...']")).sendKeys("sales");
-		driver.findElement(By.xpath("//p[@title='Manage your sales process with accounts, leads, opportunities, and more']")).click();
 		
 		WebElement opportunity=driver.findElement(By.xpath("(//span[@class='slds-truncate'])[3]"));
 		driver.executeScript("arguments[0].click();",opportunity);		
 		driver.findElement(By.xpath("//div[@title='New']")).click();		
 		WebElement getName=driver.findElement(By.xpath("//label[text()='Opportunity Name']/following::input"));
-		getName.sendKeys("Salesforce Automation by Vaishnavi");
-		String name=getName.getAttribute("value");
-				System.out.println(name);
+		getName.sendKeys(name);
+		String oppname=getName.getAttribute("value");
+				System.out.println(oppname);
 		//System.out.println("Print the Opportunity Name"+getName.getText());
 		driver.findElement(By.xpath("(//input[@class='slds-input'])[3]")).click();
 		driver.findElement(By.xpath("//button[contains(@class,'slds-button slds-align_absolute-center')]")).click();
@@ -69,7 +64,8 @@ public class TC001_CreateOpportunity {
 		WebElement val=driver.findElement(By.xpath("//input[@placeholder='Search this list...']"));
 		val.sendKeys("Vaishnavi",Keys.ENTER);
 		driver.findElement(By.xpath("//span[@data-aura-class='forceInlineEditCell']")).getText();
-		
+		//driver.close();
+		//driver.quit();
 		
 		
 }
