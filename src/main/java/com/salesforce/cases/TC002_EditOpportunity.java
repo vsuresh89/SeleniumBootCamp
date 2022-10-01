@@ -18,7 +18,7 @@ public class TC002_EditOpportunity extends ProjectSpecificMethodsSelBootCamp {
 	
 	@BeforeTest
 	public void setData() {
-		excelFileName="tc002.xlsx";
+		excelFileName="tc002";
 	}
 	
 	@Test(dataProvider="Dynamic_Data")
@@ -52,20 +52,20 @@ public class TC002_EditOpportunity extends ProjectSpecificMethodsSelBootCamp {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement closeDate=driver.findElement(By.xpath("//input[@name='CloseDate']"));
-		driver.executeScript("arguments[0].click();",closeDate);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
+		//WebElement closeDate=driver.findElement(By.xpath("//input[@name='CloseDate']"));
+		//driver.executeScript("arguments[0].click();",closeDate);
+		//try {
+		//	Thread.sleep(5000);
+		//} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		
 		//WebElement today=
-				driver.findElement(By.xpath("//label[text()='Close Date']/following::input"));
+		//		driver.findElement(By.xpath("//label[text()='Close Date']/following::input"));
 		//String date=today.getText();
 		//int i=Integer.parseInt(date)+1;
-		driver.findElement(By.xpath("//td[@data-value='2022-09-11']//span[1]")).click();
+		//driver.findElement(By.xpath("//td[@data-value='2022-09-11']//span[1]")).click();
 		
 		WebElement stageDropdown = driver.findElement(By.xpath("//*[contains(@aria-label,'Stage,')]"));
         stageDropdown.click();

@@ -9,15 +9,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 	
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName="tc005_EditAccount";
+	}
 	
-	public void EditAccount() throws InterruptedException {
+	@Test(dataProvider="Dynamic_Data")
+	
+	public void EditAccount(String name, String bstreet,String city,String pro,String stcode,String country,
+			String shstreet,String shcity,String shpro,String shcode,String shcountry,String phno) 
+			throws InterruptedException {
 		
 		
 		
@@ -25,7 +33,7 @@ public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 		WebElement account=				driver.findElement(By.xpath("(//span[@class='slds-truncate'])[9]"));
 		driver.executeScript("arguments[0].click();",account);
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys("Vaishnavi"+Keys.ENTER);
+		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys(name +Keys.ENTER);
 		Thread.sleep(2000);
 		//name.sendKeys(Keys.ENTER);
 		
@@ -54,17 +62,17 @@ public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 		Thread.sleep(2000);
 		
 		//10)Enter Billing Address
-		driver.findElement(By.xpath("//label[text()='Billing Street']/following::textarea")).sendKeys("No:2 Kaveri nagar");
-		driver.findElement(By.xpath("(//input[@name='city'])[1]")).sendKeys("Chennai");
-		driver.findElement(By.xpath("(//input[@name='province'])[1]")).sendKeys("TN");
-		driver.findElement(By.xpath("(//input[@name='postalCode'])[1]")).sendKeys("600114");
-		driver.findElement(By.xpath("(//input[@name='country'])[1]")).sendKeys("India");
+		driver.findElement(By.xpath("//label[text()='Billing Street']/following::textarea")).sendKeys(bstreet);
+		driver.findElement(By.xpath("(//input[@name='city'])[1]")).sendKeys(city);
+		driver.findElement(By.xpath("(//input[@name='province'])[1]")).sendKeys(pro);
+		driver.findElement(By.xpath("(//input[@name='postalCode'])[1]")).sendKeys(stcode);
+		driver.findElement(By.xpath("(//input[@name='country'])[1]")).sendKeys(country);
 		//11)Enter Shipping Address
-		driver.findElement(By.xpath("(//textarea[@name='street'])[2]")).sendKeys("No:2 Kaveri nagar");
-		driver.findElement(By.xpath("(//input[@name='city'])[2]")).sendKeys("Chennai");
-		driver.findElement(By.xpath("(//input[@name='province'])[2]")).sendKeys("TN");
-		driver.findElement(By.xpath("(//input[@name='postalCode'])[2]")).sendKeys("600114");
-		driver.findElement(By.xpath("(//input[@name='country'])[2]")).sendKeys("India");
+		driver.findElement(By.xpath("(//textarea[@name='street'])[2]")).sendKeys(shstreet);
+		driver.findElement(By.xpath("(//input[@name='city'])[2]")).sendKeys(shcity);
+		driver.findElement(By.xpath("(//input[@name='province'])[2]")).sendKeys(shpro);
+		driver.findElement(By.xpath("(//input[@name='postalCode'])[2]")).sendKeys(shcode);
+		driver.findElement(By.xpath("(//input[@name='country'])[2]")).sendKeys(shcountry);
 		Thread.sleep(2000);
 		
 		//12)Select Customer Priority as Low
@@ -86,7 +94,7 @@ public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 		Thread.sleep(2000);
 		
 		//15) Enter Unique Number in Phone Field
-		driver.findElement(By.xpath("//input[@name='Phone']")).sendKeys("9043616787");	
+		driver.findElement(By.xpath("//input[@name='Phone']")).sendKeys(phno);	
 		Thread.sleep(2000);
 		
 		//16)Select Upsell Oppurtunity as No
@@ -97,11 +105,11 @@ public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 		
 		//17)Click on save and verfiy Phone number
 		driver.findElement(By.xpath("//button[@name='SaveEdit']")).click();
-		boolean phno = driver.findElement(By.xpath("//span[@class='forceOutputPhone slds-truncate']")).isEnabled();
+		boolean phnumber = driver.findElement(By.xpath("//span[@class='forceOutputPhone slds-truncate']")).isEnabled();
 		System.out.println(phno);
 //Expected Result:
 //The Account is Edited Successfully
-		if(phno=true)
+		if(phnumber=true)
 		  {
 			System.out.println("Account is Edited");  
 		  }
@@ -116,8 +124,7 @@ public class TC005_EditAccount extends ProjectSpecificMethodsSelBootCamp {
 		
 		String expectedText="Vaishnavi";
 		Assert.assertEquals(verifyName,expectedText );*/
-		driver.close();
-		driver.quit();
+		
 		
 		
 		}

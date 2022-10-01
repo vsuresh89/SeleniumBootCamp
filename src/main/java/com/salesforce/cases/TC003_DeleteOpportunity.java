@@ -10,6 +10,7 @@ package com.salesforce.cases;
 	import org.openqa.selenium.chrome.ChromeDriver;
 	import org.openqa.selenium.chrome.ChromeOptions;
 	import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import dev.failsafe.internal.util.Assert;
@@ -17,9 +18,15 @@ import dev.failsafe.internal.util.Assert;
 
 	public class TC003_DeleteOpportunity extends ProjectSpecificMethodsSelBootCamp {
 		
-		@Test
+		@BeforeTest
+		public void setData() {
+			excelFileName="tc003_DeleteOpportunity";
+		}
 		
-		public void DeleteOpportunity() throws InterruptedException {
+		
+		@Test(dataProvider="Dynamic_Data")
+		
+		public void DeleteOpportunity(String name) throws InterruptedException {
 			
 			
 			
@@ -29,7 +36,7 @@ import dev.failsafe.internal.util.Assert;
 			
 			//driver.executeScript("arguments[0].click();",opportunity1);
 			WebElement val=driver.findElement(By.xpath("//input[@placeholder='Search this list...']"));
-			val.sendKeys("Vaishnavi");
+			val.sendKeys(name);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {

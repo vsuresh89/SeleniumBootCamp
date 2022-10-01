@@ -9,15 +9,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC006_DeleteAccount extends ProjectSpecificMethodsSelBootCamp {
 	
-	@Test
+	@BeforeTest
+	public void setData() {
+		excelFileName="tc006_DeleteAccount";
+	}
 	
-	public void DeleteAccount() throws InterruptedException {
+	@Test(dataProvider="Dynamic_Data")
+	
+	public void DeleteAccount(String name) throws InterruptedException {
 		
 		
 		
@@ -25,7 +31,7 @@ public class TC006_DeleteAccount extends ProjectSpecificMethodsSelBootCamp {
 		WebElement account=				driver.findElement(By.xpath("(//span[@class='slds-truncate'])[9]"));
 		driver.executeScript("arguments[0].click();",account);
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys("Vaishnavi"+Keys.ENTER);
+		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys(name +Keys.ENTER);
 		Thread.sleep(2000);
 		//name.sendKeys(Keys.ENTER);
 		
@@ -65,8 +71,8 @@ public class TC006_DeleteAccount extends ProjectSpecificMethodsSelBootCamp {
 		String expectedText="Vaishnavi";
 		Assert.assertEquals(verifyName,expectedText );*/
 		
-		driver.close();
-		driver.quit();
+		//driver.close();
+		//driver.quit();
 		
 		}
 }
