@@ -9,12 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC010_LegalEntSortModifiedDate {
 	
-	public static void main(String[] args) throws InterruptedException {
+@Test
+	
+	public void LegalEntSortModifiedDate() throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -49,6 +52,8 @@ public class TC010_LegalEntSortModifiedDate {
 		
 		//((//tbody/tr[2]//td[3])[2]//span[1]/span)[1]
 		
+		driver.close();
+		driver.quit();
 		
 
 	}

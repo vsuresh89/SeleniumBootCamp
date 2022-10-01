@@ -9,12 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC009_CreateLegalEntWOManField {
 	
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	
+	public void createLegalEntWOManField() throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -69,7 +72,9 @@ public class TC009_CreateLegalEntWOManField {
 			 System.out.println("Account created successfully");
 		 }
 			
-		
+		 driver.close();
+			driver.quit();
+			
 
 	}
 }

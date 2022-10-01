@@ -8,12 +8,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC007_CreateLegalEntity {
 	
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	
+	public void CreateLegalEntity() throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -57,6 +60,8 @@ public class TC007_CreateLegalEntity {
 		}else {
 			System.out.println("The Legal Entity is not created Successfully");
 		}
-
+		driver.close();
+		driver.quit();
+		
 	}
 }

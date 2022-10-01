@@ -9,12 +9,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TC008_EditLegalEntity {
+public class TC008_EditLegalEntity extends ProjectSpecificMethodsSelBootCamp {
 	
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	
+	public void EditLegalEntity() throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -64,7 +67,9 @@ public class TC008_EditLegalEntity {
 			System.out.println("The status: "+statusVal);
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("//button[@title='Save']//span[1]")).click();
-			
+			driver.close();
+			driver.quit();
+				
 			
 	}
 }

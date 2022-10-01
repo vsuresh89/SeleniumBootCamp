@@ -8,41 +8,32 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import dev.failsafe.internal.util.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class TC002_EditOpportunity {
+public class TC002_EditOpportunity extends ProjectSpecificMethodsSelBootCamp {
 	
-	public static void main(String[] args) {
+	@BeforeTest
+	public void setData() {
+		excelFileName="tc002.xlsx";
+	}
+	
+	@Test(dataProvider="Dynamic_Data")
+	
+	public void EditOpportunity(String name,String desc) {
 		
 		
-		WebDriverManager.chromedriver().setup();
-		ChromeOptions options=new ChromeOptions();
-		options.addArguments("--disable-notifications");
 		
-		
-		ChromeDriver driver=new ChromeDriver(options);
-		
-		driver.get("https://login.salesforce.com/");
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-		WebElement elementUsername=driver.findElement(By.id("username"));
-		elementUsername.sendKeys("hari.radhakrishnan@qeagle.com");
-		WebElement elementPassword=driver.findElement(By.id("password"));
-		elementPassword.sendKeys("India$321");
-		driver.findElement(By.id("Login")).click();
-		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
-		driver.findElement(By.xpath("//button[text()='View All']")).click();
-		driver.findElement(By.xpath("//input[@placeholder='Search apps or items...']")).sendKeys("sales");
-		driver.findElement(By.xpath("//p[@title='Manage your sales process with accounts, leads, opportunities, and more']")).click();
 		
 		WebElement opportunity=driver.findElement(By.xpath("(//span[@class='slds-truncate'])[3]"));
 		driver.executeScript("arguments[0].click();",opportunity);		
 		
 		//driver.executeScript("arguments[0].click();",opportunity1);
 		WebElement val=driver.findElement(By.xpath("//input[@placeholder='Search this list...']"));
-		val.sendKeys("Salesforce Automation by Vaishnavi");
+		val.sendKeys(name);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -84,8 +75,9 @@ public class TC002_EditOpportunity {
 		//driver.findElement(By.xpath("(//button[@data-value='--None--'])[3]")).click();
 		//driver.findElement(By.xpath("//span[contains(@title,'In progress')]")).click();
         
-        driver.findElement(By.xpath("//label[text()='Description']/following::textarea")).sendKeys("SalesForce");
+        driver.findElement(By.xpath("//label[text()='Description']/following::textarea")).sendKeys(desc);
         driver.findElement(By.xpath("//button[@name='SaveEdit']")).click();
+        
         
 		
 		

@@ -13,13 +13,14 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
 import dev.failsafe.internal.util.Assert;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TC018_UpdateContact {
-	
-	public static void main(String[] args) throws InterruptedException {
+	@Test
+	public void UpdateContact() throws InterruptedException {
 		
 		
 		WebDriverManager.chromedriver().setup();
@@ -101,6 +102,8 @@ public class TC018_UpdateContact {
 			  System.out.println("Contact is not Updated");
 		  }
 		
+		driver.close();
+		driver.quit();
 		
 		
 	}
